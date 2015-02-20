@@ -1,0 +1,20 @@
+{
+  "name": "prono-foot",
+  "version": "0.0.0",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.1",
+    "font-awesome": "~4.2.0"
+  }
+}
+
+set HTTP_PROXY=http://user:password@proxy.domain.com:port
+git config --global http.proxy http://httpproxy.tf1.fr:8090
+set HTTPS_PROXY=http://httpproxy.tf1.fr:8090
