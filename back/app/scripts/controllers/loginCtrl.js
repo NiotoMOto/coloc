@@ -1,3 +1,3 @@
-angular.module('coloc').controller('loginCtrl',function() {
+angular.module('coloc').controller('loginCtrl',[function() {
 
-});
+}]);

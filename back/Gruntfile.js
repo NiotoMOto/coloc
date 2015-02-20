@@ -88,7 +88,7 @@ module.exports = function(grunt) {
 			},
 			html: {
 				files: ['app/**/*.html'], // which files to watch
-				tasks: [],
+				tasks: ['includeSource'],
 				options: {
 					nospawn: false,
 					livereload: true,

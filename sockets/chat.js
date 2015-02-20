@@ -1,4 +1,4 @@
-"use strict"
+'use strict';
 
 var userNames = (function () {
   var names = {};

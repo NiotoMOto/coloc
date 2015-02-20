@@ -1,10 +1,20 @@
 'use strict';
 
-angular.module('coloc').factory('queryService', 'CONFIG', function apiFoot($resource, config) {
-	var getModel = function(model) {
-		return $resource(config.server.url + '/' + model);
-	};
-	return {
-		getModel: getModel
-	};
-});
+angular.module('coloc').factory('queryService', ['$resource', 'CONFIG', function apiFoot($resource, config) {
+  var getModel = function(strModel) {
+    var model = $resource(config.server.url + '/' + strModel + '/:id', null, {
+      'findAll': {
+        method: 'get',
+				isArray : true
+      }
+    });
+		return  {
+			findAll : function(){
+				return model.findAll().$promise;
+			}
+		};
+  };
+  return {
+    getModel: getModel
+  };
+}]);
