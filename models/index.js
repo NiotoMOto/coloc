@@ -18,10 +18,21 @@ Object.keys(db).forEach(function(modelName) {
 	}
 });
 
-db.Coloc.belongsToMany(db.User);
-db.User.belongsToMany(db.Coloc);
-db.Spend.belongsTo(db.User);
-db.Spend.belongsTo(db.Coloc);
+// db.Coloc.belongsToMany(db.User, {
+//   as : 'users',
+// 	through: 'ColocsUsers'
+// });
+// db.User.belongsToMany(db.Coloc, {
+//   as : 'colocs',
+// 	through: 'ColocsUsers'
+// });
+
+db.Spend.belongsTo(db.User, {
+	as: 'user'
+});
+db.Spend.belongsTo(db.Coloc, {
+	as: 'coloc'
+});
 
 sequelize.drop({
 	forced: true
@@ -34,6 +45,13 @@ sequelize.drop({
 		});
 		db.Coloc.create({
 			name: 'Le Croisty'
+		}).then(function(croisty) {
+			db.User.create({
+				username: 'boubou',
+				passowrd: 'boubou',
+			}).then(function(boubou) {
+				croisty.addUser(boubou);
+			});
 		});
 		db.Coloc.create({
 			name: 'Poissy'

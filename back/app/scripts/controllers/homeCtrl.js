@@ -1,16 +1,71 @@
 'use strict';
 
-angular.module('coloc').controller('homeCtrl', ['$scope', 'queryService', '$cookieStore', function($scope, queryService,
-	$cookieStore) {
-	var Coloc = queryService.getModel('colocs');
-	var User = queryService.getModel('users');
-	var currentUser = $cookieStore.get('user');
-  console.log(currentUser);
-	Coloc.findAll().then(function(data) {
-		$scope.colocs = data;
-	});
-	User.findAll().then(function(data) {
-    $cookieStore.put('user',data[0]);
-		$scope.uers = data;
-	});
+angular.module('coloc').controller('homeCtrl', ['$scope', 'queryService', 'contextService', function($scope,
+  queryService, contextService) {
+  var Spend = queryService.getModel('spends');
+
+  function getSolde(totals) {
+    return totals.solde.total - (totals.total.total / (totals.userCount ? totals.userCount : 1));
+  }
+
+  $scope.colocUsers = contextService.coloc.users;
+  $scope.soldes = {};
+
+  function getSoldes() {
+    _.each(contextService.coloc.users, function(user) {
+      queryService.query().post('/computed/spends/total', {
+        user: user,
+        coloc: contextService.coloc
+      }).success(function(totals) {
+        $scope.soldes[user.id] = {};
+        $scope.soldes[user.id].totals = totals;
+        $scope.soldes[user.id].solde = getSolde(totals);
+        console.log(totals);
+      });
+    });
+  }
+
+  function getTotal() {
+    queryService.query().post('/computed/spends/total', {
+      user: contextService.user,
+      coloc: contextService.coloc
+    }).success(function(totals) {
+      $scope.totals = totals;
+      $scope.solde = getSolde(totals);
+      console.log($scope.solde);
+    });
+  }
+
+  function getSpends() {
+    Spend.findAll().then(function(data) {
+      $scope.spends = data.elements;
+    });
+  }
+
+  $scope.saveSpend = function() {
+    var requete = {};
+    requete.spend = $scope.newSpend;
+    requete.user = contextService.user;
+    requete.coloc = contextService.coloc;
+    Spend.save(requete).then(function() {
+      $scope.newSpend = {};
+      getSpends();
+      getTotal();
+			getSoldes();
+    });
+  };
+
+  $scope.deleteSpend = function(spend) {
+    Spend.remove(spend.id).then(function() {
+      getTotal();
+			getSoldes();
+      getSpends();
+    });
+  };
+
+  $scope.init = function() {
+    getSpends();
+    getTotal();
+		getSoldes();
+  };
 }]);
