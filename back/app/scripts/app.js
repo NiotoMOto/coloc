@@ -31,6 +31,10 @@ angular
         templateUrl: 'views/home.html',
         controller: 'homeCtrl'
       })
+      .when('/preferences/user', {
+        templateUrl: 'views/preferences/preferences.html',
+        controller: 'preferencesCtrl'
+      })
       .otherwise({
         redirectTo: '/home'
       });

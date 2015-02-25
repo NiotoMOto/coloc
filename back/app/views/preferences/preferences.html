@@ -1,0 +1,54 @@
+<form ng-submit="savePreferences()">
+  <div ng-init="init()" class="row">
+    <div class="col-md-6">
+      <div class="box box-primary">
+        <div class="box-header">
+          <h3 class="box-title">Utilisateur</h3>
+        </div>
+        <form role="form">
+          <div class="box-body">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Pseudo</label>
+              <input type="text" class="form-control" ng-model="user.username" id="exampleInputEmail1" placeholder="Votre pseudo">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Mot de passe</label>
+              <input type="password" class="form-control" ng-model="user.password" id="exampleInputPassword1" placeholder="Mot de passe">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Adresse mail</label>
+              <input type="mail" class="form-control" ng-model="user.mail" id="exampleInputPassword1" placeholder="Adresse mail">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="box box-primary">
+        <div class="box-header">
+          <h3 class="box-title">Colocation</h3>
+        </div>
+        <form role="form">
+          <div class="box-body">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Nom</label>
+              <input type="text" class="form-control" ng-model="coloc.name" id="exampleInputEmail1" placeholder="Nom de la colocation">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Plafond</label>
+              <input type="number" class="form-control" ng-model="coloc.plafond" id="exampleInputPassword1" placeholder="Plafond">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="">
+    <div class="box-header">
+      <div class="pull-right">
+        <button type="submit" ng-click="savePreferences()" class="btn btn-primary">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</form>
