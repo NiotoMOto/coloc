@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>Coloc</title>
+  <title>Coloc </title>
   <link rel="stylesheet" href="styles/main.css" />
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
@@ -12,7 +12,7 @@
 
 <body ng-cloak ng-controller="indexCtrl" ng-app="coloc" class="skin-blue  wysihtml5-supported  pace-done">
   <header class="header">
-    <a href="#/home" class="logo">
+    <a href="index.html" class="logo" >
       Coloc {{currentColoc.name}}
     </a>
     <!-- Header Navbar: style can be found in header.less -->
@@ -55,7 +55,7 @@
           </li>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+            <a href=""  class="dropdown-toggle" data-toggle="dropdown">
               <i class="glyphicon glyphicon-user"></i>
               <span>{{currentUser.username}}<i class="caret"></i></span>
             </a>
@@ -65,7 +65,7 @@
                 <img src="img/avatar3.png" class="img-circle" alt="User Image">
                 <p>
                   {{currentUser.username}}
-                  <small>Member since {{currentUser.createdAt | date: 'shortDate'}}</small>
+                  <small>Member since Nov. 2012</small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -114,24 +114,13 @@
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
           <span class="input-group-btn">
-            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-          </span>
+                                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                            </span>
         </div>
       </form>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="">
-          <a href="#/home">
-            <i class="fa fa-home"></i>  <span>Accueil</span>
-          </a>
-        </li>
-        <li class="">
-          <a href="#/preferences/user">
-            <i class="fa fa-cogs"></i>  <span>Préférences</span>
-            <small class="badge pull-right bg-green">0</small>
-          </a>
-        </li>
       </ul>
 
     </section>
@@ -142,7 +131,7 @@
     <section class="content-header">
       <h1>
       Coloc
-      <small>Accueil</small>
+      <small>Acceuil</small>
     </h1>
     </section>
     <section ng-view class="content">
@@ -164,8 +153,6 @@
 <script src="bower_components/ui-select/dist/select.js"></script>
 <script src="bower_components/lodash/lodash.js"></script>
 <!-- endbower -->
-
-<script src="bower_components/angular-i18n/angular-locale_fr-fr.js"></script>
 
 <!-- include: "type": "js", "files": "scripts/libs/**/*.js" -->
 <script src="scripts/libs/0datatables/0jquery.dataTables.js"></script>
@@ -226,10 +213,8 @@
 <script src="scripts/controllers/homeCtrl.js"></script>
 <script src="scripts/controllers/indexCtrl.js"></script>
 <script src="scripts/controllers/loginCtrl.js"></script>
-<script src="scripts/controllers/preferences/preferencesCtrl.js"></script>
 <!-- /include -->
-<script src="scripts/services/context.js"></script>
-<script src="scripts/services/queryService.js"></script>
+<!-- include: "type": "js", "files": "scripts/services/**/*.js" -->
 <script src="scripts/services/context.js"></script>
 <script src="scripts/services/queryService.js"></script>
 <!-- /include -->
