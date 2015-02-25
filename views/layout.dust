@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Colocons</title>
+    <link rel='stylesheet' href='/public/stylesheets/css/app.css' />
+    <!-- bower:css -->
+    <link rel='stylesheet' href='../bower_components/bootstrap/dist/css/bootstrap.css' />
+    <link rel='stylesheet' href='../bower_components/font-awesome/css/font-awesome.css' />
+    <!-- endbower -->
+
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <h1>{title}</h1>
+        {+content}
+            This is the base content.
+        {/content}
+
+  <!-- bower:js -->
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <!-- endbower -->
+  <script src="/public/scripts/script.js"></script>
+  <script src="/public/scripts/agency.js"></script>
+  <script src="/public/scripts/classie.js"></script>
+  <script src="/public/scripts/contact_me.js"></script>
+  <script src="/public/scripts/jqBootstrapValidation.js"></script>
+  <script src="/public/scripts/cbpAnimatedHeader.min.js"></script>
+  </body>
+<!--
+{session}
+-->
+</html>

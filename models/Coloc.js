@@ -2,7 +2,8 @@
 
 module.exports = function(sequelize, DataTypes) {
 	var Coloc = sequelize.define('Coloc', {
-		name: DataTypes.STRING
+		name: DataTypes.STRING,
+		plafond : DataTypes.FLOAT
 	}, {
 		classMethods: {
 			associate: function(models) {
