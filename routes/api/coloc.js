@@ -26,7 +26,6 @@ module.exports = function(router) {
         as: 'users'
       }]
     }).then(function(coloc) {
-      console.log(coloc);
       res.json(coloc);
     });
   });

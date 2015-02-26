@@ -42,7 +42,7 @@
             <div class="intro-text">
                 <div class="intro-lead-in">Bienvenue sur colocons.fr</div>
                 <div class="intro-heading">Coloquez plus facilement!</div>
-                <a href="#presentation" class="page-scroll btn btn-xl">En savoir plus</a>
+                <a href="#presentation" class="page-scroll btn btn-primary btn-xl">En savoir plus</a>
             </div>
         </div>
     </header>
@@ -121,7 +121,7 @@
                             <div class="clearfix"></div>
                             <div class="col-lg-12 text-center">
                                 <div id="success"></div>
-                                <button type="submit" class="btn btn-xl">Inscription</button>
+                                <button type="submit" class="btn btn-primary btn-xl">Inscription</button>
                             </div>
                         </div>
                     </form>
@@ -138,37 +138,16 @@
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Connexion</h2>
                     {#justInscrit}
-                      <h3 class="section-subheading text-success text-muted">Inscription réussie, vous pouvez maintenant vous connecter</h3>
+                      <h3 class="section-subheading text-success text-muted"><i class="fa fa-check"></i> Inscription réussie, vous pouvez maintenant vous connecter</h3>
                       {:else}
-                      <h3 class="section-subheading text-muted">Connexion avec votre email / mot de passe</h3>
+                      <h3 class="section-subheading text-muted">Accéder a l'application</h3>
                     {/justInscrit}
 
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
-                    <form name="sentMessage" id="inscriptionForm" novalidate>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Pseudo *" id="name" required data-validation-required-message="Veuillez rentrer un pseudo.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="form-group">
-                                  <input type="password" class="form-control" placeholder="Mot de passe *" id="phone" required data-validation-required-message="Veuillez renter un mot de passe.">
-                                  <p class="help-block text-danger"></p>
-                              </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-lg-12 text-center">
-                                <div id="success"></div>
-                                <button type="submit" class="btn btn-xl">Inscription</button>
-                            </div>
-                        </div>
-                    </form>
+                <div class="col-lg-12 text-center">
+                  <a href="http://localhost:9000" class="btn btn-lg btn-primary"><i class="fa fa-birthday-cake"></i> Accéder à l'application</a>
                 </div>
             </div>
         </div>
@@ -271,7 +250,7 @@
                             <div class="clearfix"></div>
                             <div class="col-lg-12 text-center">
                                 <div id="success"></div>
-                                <button type="submit" class="btn btn-xl">Send Message</button>
+                                <button type="submit" class="btn btn-primary btn-xl">Send Message</button>
                             </div>
                         </div>
                     </form>

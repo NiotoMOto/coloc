@@ -4,7 +4,7 @@ angular.module('coloc').factory('queryService', ['$resource', 'CONFIG', '$http',
 
   function apiFoot($resource, config, $http) {
     var getModel = function(strModel) {
-      var model = $resource(config.server.url + '/' + strModel + '/:id', null, {
+      var model = $resource(config.server.apiUrl + '/' + strModel + '/:id', null, {
         'findAll': {
           method: 'get'
         },
@@ -23,6 +23,9 @@ angular.module('coloc').factory('queryService', ['$resource', 'CONFIG', '$http',
         save: function(data) {
           return model.save(data).$promise;
         },
+        get: function(data) {
+          return model.get(data).$promise;
+        },
         remove: function(id) {
           return model.remove({
             id: id
@@ -34,10 +37,10 @@ angular.module('coloc').factory('queryService', ['$resource', 'CONFIG', '$http',
     var query = function() {
       return {
         get: function(url) {
-          return $http.get(config.server.url + url);
+          return $http.get(config.server.apiUrl + url);
         },
         post: function(url, data) {
-          return $http.post(config.server.url + url, data);
+          return $http.post(config.server.apiUrl + url, data);
         }
       };
     };

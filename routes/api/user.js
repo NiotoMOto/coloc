@@ -27,7 +27,6 @@ module.exports = function(router) {
         as: 'colocs'
       }]
     }).then(function(user) {
-      user.getColoc();
       res.json(user);
     });
   });

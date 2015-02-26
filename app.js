@@ -4,7 +4,55 @@ var cons = require('consolidate');
 var cors = require('cors');
 var path = require('path');
 var bodyParser = require('body-parser');
-// var  io = require('socket.io');
+var models = require('./models/');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var cookieParser = require('cookie-parser');
+var session = require('cookie-session');
+
+passport.use(new LocalStrategy(
+	function(username, password, done) {
+		models.User.find({
+			where: {
+				username: username
+			}
+		}).then(function(user, err) {
+			console.log(err);
+			if (err) {
+				return done(err);
+			}
+			if (!user) {
+				return done(null, false, {
+					message: 'Incorrect username.'
+				});
+			}
+			if (!user.validPassword(password)) {
+				return done(null, false, {
+					message: 'Incorrect password.'
+				});
+			}
+			return done(null, user);
+		});
+	}
+));
+
+passport.serializeUser(function(user, done) {
+	done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+	done(null, user);
+});
+
+
+var auth = function(req, res, next) {
+	if (!req.isAuthenticated()) {
+		res.sendStatus(401);
+	} else {
+		console.log('logged');
+		next();
+	}
+};
 
 // require('./sockets/chat')(io);
 var app = express();
@@ -14,16 +62,27 @@ require('./routes/api/')(apiRoutes);
 app.engine('dust', cons.dust);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'dust');
+
+app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
-}));
+app.use(bodyParser
+	.urlencoded({
+		extended: true
+	}));
 app.use('/public', express.static(path.join(__dirname, 'public/')));
 app.use('/bower_components', express.static(path.join(__dirname, 'bower_components/')));
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:9000',
+  credentials : true
+}));
+app.use(session({ secret: 'securedsession' }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/', routes);
+app.use('/api', auth);
 app.use('/api', apiRoutes);
+
 var port = 3001;
 app.listen(port, function() {
-  console.log('Server listening on port ' + port);
+	console.log('Server listening on port ' + port);
 });

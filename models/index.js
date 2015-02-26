@@ -48,7 +48,7 @@ sequelize.drop({
 		}).then(function(croisty) {
 			db.User.create({
 				username: 'boubou',
-				passowrd: 'boubou',
+				password: 'boubou',
 			}).then(function(boubou) {
 				croisty.addUser(boubou);
 			});
@@ -59,14 +59,14 @@ sequelize.drop({
 
 			db.User.create({
 				username: 'Antoine',
-				passowrd: 'coucou',
+				password: 'coucou',
 			}).then(function(antoine) {
 				coloc.addUser(antoine);
 			});
 
 			db.User.create({
 				username: 'Sébastien',
-				passowrd: 'coucou',
+				password: 'coucou',
 			}).then(function(seb) {
 				coloc.addUser(seb);
 			});

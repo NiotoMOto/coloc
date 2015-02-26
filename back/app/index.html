@@ -14,6 +14,7 @@
   <header class="header">
     <a href="#/home" class="logo">
       Coloc {{currentColoc.name}}
+
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
@@ -30,14 +31,14 @@
           <li class="dropdown messages-menu">
             <a href="" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-user"></i>
-              <span class="label label-success">{{colocUsers.length}}</span>
+              <span class="label label-success">{{currentColoc.users.length}}</span>
             </a>
             <ul class="dropdown-menu">
               <li>
                 <!-- inner menu: contains the actual data -->
                 <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;">
                   <ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
-                    <li ng-click="changeUser(user)" ng-repeat="user in colocUsers">
+                    <li ng-click="changeUser(user)" ng-repeat="user in currentColoc.users">
                       <a href="">
                         <div class="pull-left">
                           <img src="img/avatar2.png" class="img-circle" alt="user image">
@@ -86,7 +87,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="" ng-click="logout()" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
