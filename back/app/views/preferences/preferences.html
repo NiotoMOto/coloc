@@ -87,7 +87,7 @@ Vous pouvez soit en créer une soit rejoindre vos ou votre colocataire(s) déja 
           <h3 class="box-title">Invitations</h3>
         </div>
         <div class="box-body">
-          <legend>Envoyées</legend>
+          <legend>Demandes envoyées</legend>
           <div ng-repeat="invitation in invitationsSent" class="row">
             <div class="col-sm-4">
               {{invitation.to.username}}
@@ -101,7 +101,7 @@ Vous pouvez soit en créer une soit rejoindre vos ou votre colocataire(s) déja 
               </p>
             </div>
           </div>
-          <legend>Reçus</legend>
+          <legend>Reçues</legend>
           <div ng-repeat="invitation in invitationsReceive" class="row">
             <div class="col-sm-4">
               {{invitation.as.username}}

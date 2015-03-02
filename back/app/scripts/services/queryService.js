@@ -24,6 +24,9 @@ angular.module('coloc').factory('queryService', ['$resource', 'CONFIG', '$http',
 				},
 				'post': {
 					method: 'post'
+				},
+				'update': {
+					method: 'put'
 				}
 			});
 
@@ -39,6 +42,9 @@ angular.module('coloc').factory('queryService', ['$resource', 'CONFIG', '$http',
 				},
 				get: function(data) {
 					return model.get(data).$promise;
+				},
+				update: function(data) {
+					return model.update(data).$promise;
 				},
 				do: function(ctrl, data) {
 					return model.do(ctrl, data).$promise;

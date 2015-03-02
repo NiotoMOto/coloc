@@ -18,22 +18,6 @@ Object.keys(db).forEach(function(modelName) {
   }
 });
 
-// db.Coloc.belongsToMany(db.User, {
-//   as : 'users',
-// 	through: 'ColocsUsers'
-// });
-// db.User.belongsToMany(db.Coloc, {
-//   as : 'colocs',
-// 	through: 'ColocsUsers'
-// });
-
-db.Spend.belongsTo(db.User, {
-  as: 'user'
-});
-db.Spend.belongsTo(db.Coloc, {
-  as: 'coloc'
-});
-
 sequelize.drop({
   forced: true
 }).then(function() {
