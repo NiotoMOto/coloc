@@ -4,8 +4,7 @@ angular.module('coloc').controller('loginCtrl', ['$scope', '$http', 'CONFIG', 'c
   $scope, $http,
   config, contextService, $location) {
   $scope.login = function() {
-    $http.post(config.server.url + '/login', $scope.user).success(function(user) {
-      contextService.setUser(user);
+    $http.post(config.server.url + '/login', $scope.user).success(function() {
       $location.url('/home');
     });
   };
