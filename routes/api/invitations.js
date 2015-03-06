@@ -51,23 +51,75 @@ module.exports = function(router) {
 		});
 	});
 
-  router.put('/invitations', function(req, res) {
-    var invitation = req.body;
-    models.Invitation.find({
-      where: {
-        id: invitation.id
-      }
-    }).then(function(c) {
-      if (c) {
-        c.updateAttributes(invitation);
-        res.json(c);
-      } else {
-        invitation = models.Invitation.build(invitation);
-        invitation.save().then(function(t) {
-          res.json(t);
-        });
-      }
-    });
+	router.put('/invitations', function(req, res) {
+		var invitation = req.body;
+		var userToAdd = {};
+		var userColoc = {};
+
+		function getuser(user) {
+			return models.User.find({
+				where: {
+					id: user.id
+				},
+				include: [{
+					model: models.Coloc,
+					as: 'colocs'
+				}]
+			});
+		}
+
+		models.Invitation.find({
+			where: {
+				id: invitation.id
+			}
+		}).then(function(c) {
+			if (c) {
+				c.updateAttributes(invitation);
+				if (invitation.status === 'accepted') {
+					getuser(invitation.to).then(function(to) {
+						getuser(invitation.to).then(function(as) {
+							var userToAdd;
+							var coloc;
+							if (to.colocs[0]) {
+								console.log('colcoTO :', to.colocs[0].dataValues.id);
+							}
+							if (as.colocs[0]) {
+								console.log('colocAS : ', as.colocs[0].dataValues.id);
+							}
+              console.log(to.colocs[0]);
+              console.log(as.colocs[0]);
+							if (to.colocs[0]) {
+								userToAdd = as;
+								coloc = to.colocs[0].dataValues;
+							} else {
+								if (as.colocs[0]) {
+									userToAdd = to;
+									coloc = as.colocs[0].dataValues;
+								} else {
+									res.error('no colocs');
+								}
+							}
+							console.log(coloc);
+							var colocUsr = {
+								colocId: coloc.id,
+								userId: userToAdd.id,
+								status: 'active'
+							};
+							console.log(colocUsr);
+							models.ColocsUsers.build(colocUsr).save().then(function(colocUsr) {
+								res.json(colocUsr.colocs);
+							});
+						});
+					});
+				}
+				res.json(c);
+			} else {
+				invitation = models.Invitation.build(invitation);
+				invitation.save().then(function(t) {
+					res.json(t);
+				});
+			}
+		});
 	});
 
 	router.patch('/invitations', function(req, res) {
@@ -83,14 +135,12 @@ module.exports = function(router) {
 		}).then(function(userResult) {
 			if (userResult) {
 				var invitation = {};
-				invitation.to = userResult;
-				invitation.as = user;
 				invitation.status = status;
 				invitation = models.Invitation.build(invitation);
 				invitation.save().then(function(invitationResult) {
 					invitationResult.setTo(userResult);
 					invitationResult.setAs(user.id);
-					res.json(invitationResult);
+
 				});
 			}
 		});

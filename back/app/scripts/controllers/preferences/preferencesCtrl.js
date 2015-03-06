@@ -11,6 +11,7 @@ angular.module('coloc').controller('preferencesCtrl', ['$scope', 'contextService
   var InvitationQuery = queryService.getModel('invitations');
 
   $scope.savePreferences = function() {
+		console.log('save preferences');
     ColoQuery.save($scope.coloc);
     UserQuery.save($scope.user);
   };
@@ -21,11 +22,17 @@ angular.module('coloc').controller('preferencesCtrl', ['$scope', 'contextService
         toId: $scope.user.id
       }
     }).then(function(invitations) {
-      $scope.invitationsReceive = invitations.elements;
+      $scope.invitationsReceive = _.filter(invitations.elements, function(i) {
+        return i.status === 'sended';
+      });
+      $scope.invitationsAccepted = _.filter(invitations.elements, function(i) {
+        return i.status === 'accepted';
+      });
     });
     InvitationQuery.find({
       filter: {
-        asId: $scope.user.id
+        asId: $scope.user.id,
+        status: 'sended'
       }
     }).then(function(invitations) {
       $scope.invitationsSent = invitations.elements;
@@ -33,10 +40,17 @@ angular.module('coloc').controller('preferencesCtrl', ['$scope', 'contextService
   };
 
   $scope.acceptColoc = function(invitation) {
-		console.log(invitation);
+    console.log(invitation);
     invitation.status = 'accepted';
     InvitationQuery.update(invitation).then(function() {
-			console.log('OK');
+      console.log('OK');
+      $scope.getInvitations();
+    });
+  };
+
+  $scope.removeInvitation = function(invitation) {
+    InvitationQuery.remove(invitation.id).then(function() {
+      $scope.getInvitations();
     });
   };
 
@@ -46,9 +60,7 @@ angular.module('coloc').controller('preferencesCtrl', ['$scope', 'contextService
       search: $scope.searchColoc.search,
       status: 'sended'
     }).then(function() {
-      // InvitationQuery.post().then(function(invitations) {
-      //   $scope.invitations = invitations;
-      // });
+			$scope.getInvitations();
     });
   };
 
