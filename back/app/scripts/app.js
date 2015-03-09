@@ -23,7 +23,6 @@ angular
 	])
 	.config(function($routeProvider, $httpProvider) {
 		$httpProvider.defaults.withCredentials = true;
-
 		var checkLoggedin = function($q, $timeout, $http, $location, $rootScope, contextService) {
 			// Initialize a new promise
 			var deferred = $q.defer();

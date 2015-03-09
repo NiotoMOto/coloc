@@ -1,0 +1,10 @@
+{
+  "development": {
+    "frontUrl": "localhost:3001",
+    "apiUrl": "localhost:3001/api"
+  },
+  "production": {
+    "frontUrl": "colocons.fr",
+    "apiUrl": "colocons.fr/api"
+  }
+}

@@ -2,6 +2,9 @@
 var models = require('../models');
 var express = require('express');
 var passport = require('passport');
+var path = require('path');
+var env = process.env.NODE_ENV || 'development';
+var siteconfig = require(path.join(__dirname, '../config/siteConfig.json'))[env];
 var router = express.Router();
 
 router.get('/', function(req, res) {
@@ -26,6 +29,10 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 router.post('/logout', function(req, res) {
   req.logOut();
   res.sendStatus(200);
+});
+
+router.get('/config', function(req, res){
+  res.json(siteconfig);
 });
 
 router.post('/inscription', function(req, res) {
