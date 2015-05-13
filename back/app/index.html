@@ -10,7 +10,7 @@
   <!-- endbower -->
 </head>
 
-<body ng-cloak ng-controller="indexCtrl" ng-app="coloc" class="skin-blue  wysihtml5-supported  pace-done">
+<body ng-cloak ng-controller="indexCtrl" ng-app="coloc" ng-class="{'login' : $root.login}" class="skin-blue  wysihtml5-supported  pace-done">
   <header class="header">
     <a href="#/home" class="logo">
       Coloc {{currentColoc.name}}
@@ -164,6 +164,7 @@
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="bower_components/ui-select/dist/select.js"></script>
 <script src="bower_components/lodash/lodash.js"></script>
+<script src="bower_components/iCheck/icheck.min.js"></script>
 <!-- endbower -->
 
 <script src="bower_components/angular-i18n/angular-locale_fr-fr.js"></script>

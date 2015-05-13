@@ -8,16 +8,19 @@ var models = require('./models/');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
+var env = process.env.NODE_ENV || 'development';
 var session = require('cookie-session');
 
+var routes = require('./routes/');
+var back = require('./back/lib/');
+
 passport.use(new LocalStrategy(
-	function(username, password, done) {
+	function (username, password, done) {
 		models.User.find({
 			where: {
 				username: username
 			}
-		}).then(function(user, err) {
-			console.log(err);
+		}).then(function (user, err) {
 			if (err) {
 				return done(err);
 			}
@@ -34,18 +37,18 @@ passport.use(new LocalStrategy(
 			return done(null, user);
 		});
 	}
-));
+	));
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
 	done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser(function (user, done) {
 	done(null, user);
 });
 
 
-var auth = function(req, res, next) {
+var auth = function (req, res, next) {
 	if (!req.isAuthenticated()) {
 		res.sendStatus(401);
 	} else {
@@ -56,7 +59,7 @@ var auth = function(req, res, next) {
 // require('./sockets/chat')(io);
 var app = express();
 var apiRoutes = express.Router();
-var routes = require('./routes/');
+
 require('./routes/api/')(apiRoutes);
 app.engine('dust', cons.dust);
 app.set('views', __dirname + '/views');
@@ -66,22 +69,32 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser
 	.urlencoded({
-		extended: true
-	}));
+	extended: true
+}));
 app.use('/public', express.static(path.join(__dirname, 'public/')));
 app.use('/bower_components', express.static(path.join(__dirname, 'bower_components/')));
 app.use(cors({
-  origin: 'http://localhost:9000',
-  credentials : true
+	origin: 'http://localhost:9000',
+	credentials: true
 }));
 app.use(session({ secret: 'securedsession' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/', routes);
+app.use('/app', back);
 app.use('/api', auth);
 app.use('/api', apiRoutes);
 
+
+// This will change in production since we'll be using the dist folder
+app.use(express.static(path.join(__dirname, './back/')));
+// This covers serving up the index page
+app.use(express.static(path.join(__dirname, './back/app/')))
+app.get('/back', function (req, res) {
+	res.sendfile('index.html', { root: './back/app/' });
+});
+
 var port = 3001;
-app.listen(port, function() {
+app.listen(port, function () {
 	console.log('Server listening on port ' + port);
 });

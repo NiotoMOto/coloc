@@ -67,12 +67,12 @@ module.exports = function(grunt) {
 				livereload: 35728
 			},
 			bower: {
-				files: ['bower.json'],
+				files: ['bower_components/*'],
 				tasks: ['wiredep']
 			},
 			js: {
 				files: ['app/scripts/**/*.js'],
-				tasks: ['includeSource','wiredep'],
+				tasks: ['includeSource', 'wiredep'],
 				options: {
 					nospawn: false,
 					livereload: true,
@@ -96,5 +96,5 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.registerTask('default', ['includeSource','wiredep', 'connect', 'watch']);
+	grunt.registerTask('default', ['includeSource', 'wiredep', 'connect', 'watch']);
 };

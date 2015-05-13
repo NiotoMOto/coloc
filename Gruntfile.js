@@ -45,7 +45,7 @@ module.exports = function(grunt) {
     },
     watch: {
       express: {
-        files: ['routes/**/*.js', 'models/**/*.js', 'app.js'],
+        files: ['routes/**/*.js', 'models/**/*.js', 'app.js', 'back/lib/**/*.js'],
         tasks: ['express:dev'],
         delay: 200,
         options: {
