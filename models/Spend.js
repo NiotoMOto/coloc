@@ -9,6 +9,9 @@ module.exports = function(sequelize, DataTypes) {
           models.Spend.belongsTo(models.User, {
             as: 'user'
           });
+          models.Spend.belongsTo(models.User, {
+            as: 'toUser'
+          });
           models.Spend.belongsTo(models.Coloc, {
             as: 'coloc'
           });

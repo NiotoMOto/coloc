@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('coloc').controller('indexCtrl', ['$scope', 'queryService', '$cookieStore', 'contextService',
-  '$route', 'CONFIG', '$http', '$location',
+  '$route',
   function(
     $scope,
     queryService,
     $cookieStore,
     contextService,
-    $route, config, $http, $location) {
+    $route){
     $scope.context = contextService;
 
     // Coloc.findAll().then(function(data) {
@@ -20,9 +20,7 @@ angular.module('coloc').controller('indexCtrl', ['$scope', 'queryService', '$coo
     // });
 
     $scope.logout = function() {
-      $http.post(config.server.url + '/logout');
-      contextService.reset();
-      $location.url('/login');
+      contextService.logout();
     };
 
     $scope.changeUser = function(user) {

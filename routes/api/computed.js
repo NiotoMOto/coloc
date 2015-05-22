@@ -53,7 +53,6 @@ module.exports = function(router) {
         },
       },
       function(err, results) {
-        console.log(results);
         res.json(results);
       }
     );

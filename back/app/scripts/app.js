@@ -20,8 +20,7 @@ angular
 	'ui.bootstrap',
 	'ui.select',
 	'coloc.constants'
-])
-	.config(function ($routeProvider, $httpProvider) {
+]).config(function ($routeProvider, $httpProvider, CONFIG) {
 	$httpProvider.defaults.withCredentials = true;
 	var checkLoggedin = function ($q, $timeout, $http, $location, $rootScope, contextService) {
 		// Initialize a new promise
@@ -43,7 +42,7 @@ angular
 			else {
 				$rootScope.message = 'You need to log in.';
 				deferred.reject();
-				$location.url('/login');
+				window.location.href = CONFIG.server.url+'#connexion';
 			}
 		});
 
@@ -57,7 +56,7 @@ angular
 			},
 			responseError: function (response) {
 				if (response.status === 401) {
-					$location.url(config.server.url+'/app');
+					window.location.href = CONFIG.server.url+'#connexion';
 				}
 				return $q.reject(response);
 			}

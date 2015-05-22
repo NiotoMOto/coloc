@@ -41,7 +41,7 @@ angular.module('coloc').factory('contextService', ['$cookieStore', '$rootScope',
 		contextService.logout = function() {
 			$http.post(config.server.url + '/logout').success(function() {
 				contextService.reset();
-				$location.url('/login');
+				$location.url(config.server.url);
 			});
 		};
 

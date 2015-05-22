@@ -7,7 +7,7 @@ angular.module('coloc').controller('homeCtrl', ['$scope', 'queryService', 'conte
 	function getSolde(totals) {
 		return totals.solde.total - (totals.total.total / (totals.userCount ? totals.userCount : 1));
 	}
-
+	$scope.currentUser = contextService.user;
 	$scope.colocusers = contextService.coloc;
 	$scope.$watch('currentColoc', function(newColoc) {
 		if (newColoc) {
@@ -49,6 +49,8 @@ angular.module('coloc').controller('homeCtrl', ['$scope', 'queryService', 'conte
 	$scope.saveSpend = function() {
 		var requete = {};
 		requete.spend = $scope.newSpend;
+		requete.toUser = $scope.toUser;
+		console.log($scope.toUser, $scope.toUser.id);
 		requete.user = contextService.user;
 		requete.coloc = contextService.coloc;
 		Spend.save(requete).then(function() {

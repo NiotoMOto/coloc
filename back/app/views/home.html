@@ -80,7 +80,7 @@
             <span class="label label-primary"><i class="fa fa-user"></i> {{spend.user.username}}</span>
             <span class="label label-primary"><i class="fa fa-clock-o"></i> {{spend.createdAt | date : shortDate}}</span>
             <span class="pull-right">{{spend.prix}} €</span>
-            <div class="tools">
+            <div ng-if="spend.user.id === currentUser.id" class="tools">
               <i class="fa fa-edit"></i>
               <i ng-click="deleteSpend(spend)" class="fa fa-trash-o"></i>
             </div>
@@ -89,13 +89,23 @@
       </div>
       <div class="box-footer clearfix no-border row">
         <form>
-          <div class="col-md-4 text-center">
+          <div class="col-md-3 text-center">
             <input ng-model="newSpend.libelle" placeholder="Libelle" type="text" class="form-control" />
           </div>
-          <div class="col-md-4 text-center">
+          <div class="col-md-3 text-center">
             <input ng-model="newSpend.prix" placeholder="Prix" type="number" class="form-control" />
           </div>
-          <div class="col-md-4 text-right">
+          <div class="col-md-3 text-center">
+            <select ng-model="toUser" class="form-control" placeholder="type de dépense">
+              <option value="" selected="selected">
+                Dépense commune
+              </option>
+              <option value="{{colocUser.id}}" ng-repeat="colocUser in colocUsers" ng-if="colocUser.id !== currentUser.id">
+                à {{colocUser.username}}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3 text-right">
             <button class="btn btn-primary pull-right" ng-click="saveSpend()"><i class="fa fa-plus"></i> Ajouter dépense</button>
           </div>
         </form>

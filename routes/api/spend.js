@@ -24,7 +24,6 @@ module.exports = function(router) {
 
   router.get('/spends/:id', function(req, res) {
     var id = req.params.id;
-    var filter = req.body.filter;
     models.Spend.find({
       where: {
         id: id
@@ -50,6 +49,11 @@ module.exports = function(router) {
     spend.save().then(function(t) {
       if (requete.user) {
         spend.setUser(requete.user.id);
+      }
+      if (requete.toUser) {
+        console.log('---------->',requete.toUser, requete.toUser.id, requete.toUser.ColocsUsers);
+        spend.setToUser(requete.toUser);
+        console.log('------SPENDS', spend);
       }
       if (requete.coloc) {
         spend.setColoc(requete.coloc.id);

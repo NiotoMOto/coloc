@@ -86,10 +86,8 @@ app.use('/api', auth);
 app.use('/api', apiRoutes);
 
 
-// This will change in production since we'll be using the dist folder
 app.use(express.static(path.join(__dirname, './back/')));
-// This covers serving up the index page
-app.use(express.static(path.join(__dirname, './back/app/')))
+app.use(express.static(path.join(__dirname, './back/app/')));
 app.get('/back', function (req, res) {
 	res.sendfile('index.html', { root: './back/app/' });
 });
